@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夏琳天使心研所 | 陳熠醺 Shalin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8a6d3b;
+    --deep: #0e0c14;
+    --purple-deep: #1a1228;
+    --purple-mid: #2d1f4a;
+    --purple-soft: #4a3472;
+    --cream: #f5f0e8;
+    --cream-soft: #faf7f2;
+    --text-body: #d4c9b8;
+    --text-light: #a89880;
+    --glow: rgba(201,169,110,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--text-body);
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4vw;
+    background: linear-gradient(to bottom, rgba(14,12,20,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-style: italic;
+    color: var(--gold-light); letter-spacing: 0.08em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--text-light); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.14em;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-toggle span { width: 24px; height: 1.5px; background: var(--gold); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 4vw 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(74,52,114,0.45) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 70%, rgba(201,169,110,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0e0c14 0%, #1a1228 50%, #0e0c14 100%);
+    z-index: 0;
+  }
+  /* Floating orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .orb-1 { width: 400px; height: 400px; top: 10%; left: -10%; animation-delay: 0s; }
+  .orb-2 { width: 250px; height: 250px; top: 50%; right: 5%; animation-delay: -3s; }
+  .orb-3 { width: 180px; height: 180px; bottom: 20%; left: 30%; animation-delay: -5s;
+    background: radial-gradient(circle, rgba(74,52,114,0.4) 0%, transparent 70%); }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .stars {
+    position: absolute; inset: 0; overflow: hidden; z-index: 0;
+  }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; } 50% { opacity: 1; }
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.1rem;
+    color: var(--gold); letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+    opacity: 0; animation: fadeUp 1s 0.6s forwards;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-style: italic; color: var(--gold-light);
+    letter-spacing: 0.15em; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 1s 0.8s forwards;
+  }
+  .hero-desc {
+    max-width: 560px; margin: 0 auto 3rem;
+    font-size: 0.95rem; line-height: 2;
+    color: var(--text-light);
+    opacity: 0; animation: fadeUp 1s 1s forwards;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 1s 1.2s forwards;
+  }
+  .btn {
+    padding: 0.85rem 2.2rem;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.85rem; letter-spacing: 0.18em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.35s;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-outline {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid rgba(201,169,110,0.5);
+  }
+  .btn-outline:hover {
+    background: rgba(201,169,110,0.1);
+    border-color: var(--gold);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--text-light); font-size: 0.72rem; letter-spacing: 0.2em;
+    z-index: 1;
+    animation: fadeUp 1s 1.5s both;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.85rem;
+    color: var(--gold); letter-spacing: 0.3em;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 60px;
+    height: 1px; background: var(--gold-dark);
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900; color: var(--cream);
+    line-height: 1.3; margin-bottom: 1rem;
+  }
+  .section-title em { font-style: normal; color: var(--gold); }
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 1.5rem 0;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: linear-gradient(180deg, var(--deep) 0%, var(--purple-deep) 100%); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,169,110,0.15);
+    padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: all 0.4s;
+  }
+  .service-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .service-card:hover { background: rgba(201,169,110,0.06); border-color: rgba(201,169,110,0.4); transform: translateY(-4px); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { font-size: 2.2rem; margin-bottom: 1.2rem; }
+  .service-name {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--gold-light); margin-bottom: 0.8rem;
+  }
+  .service-desc { font-size: 0.88rem; line-height: 1.9; color: var(--text-light); }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .tag {
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 0.25rem 0.7rem;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--gold-light);
+  }
+
+  /* ── STORY / ABOUT ── */
+  #about {
+    background: var(--purple-deep);
+    position: relative; overflow: hidden;
+  }
+  #about::before {
+    content: ''; position: absolute;
+    right: -10%; top: 50%; transform: translateY(-50%);
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,52,114,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-text p { font-size: 0.95rem; line-height: 2.1; color: var(--text-body); margin-bottom: 1.4rem; }
+  .about-text strong { color: var(--gold-light); font-weight: 600; }
+  .about-highlight {
+    background: rgba(201,169,110,0.07);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 2rem; margin: 2rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.15rem;
+    color: var(--gold-light); line-height: 1.9;
+  }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-item {
+    padding: 1.8rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,169,110,0.12);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.12em; margin-top: 0.4rem; }
+
+  /* ── CREDENTIALS ── */
+  #credentials { background: linear-gradient(180deg, var(--purple-deep) 0%, var(--deep) 100%); }
+  .cred-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin-top: 2.5rem;
+  }
+  .cred-item {
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,169,110,0.1);
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+  .cred-item:hover { border-color: rgba(201,169,110,0.35); }
+  .cred-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 5px; flex-shrink: 0; }
+  .cred-text { font-size: 0.83rem; line-height: 1.7; color: var(--text-body); }
+
+  /* ── TARGET ── */
+  #target { background: var(--deep); }
+  .target-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+  .target-group h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.3rem;
+    color: var(--gold); margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+  }
+  .target-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .target-list li {
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--text-body); padding-left: 1.2rem;
+    position: relative;
+  }
+  .target-list li::before {
+    content: '✦'; position: absolute; left: 0;
+    color: var(--gold-dark); font-size: 0.6rem; top: 4px;
+  }
+
+  /* ── REFERRAL ── */
+  #referral {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-mid) 100%);
+    position: relative; overflow: hidden;
+  }
+  #referral::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent, transparent 60px,
+        rgba(201,169,110,0.015) 60px, rgba(201,169,110,0.015) 61px
+      );
+    pointer-events: none;
+  }
+  .referral-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .referral-card {
+    padding: 2.5rem 2rem; text-align: center;
+    background: rgba(14,12,20,0.7);
+    border: 1px solid rgba(201,169,110,0.2);
+    position: relative;
+  }
+  .referral-tier {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem;
+    letter-spacing: 0.15em; color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+  .referral-card.dream { border-color: rgba(201,169,110,0.6); }
+  .referral-card.dream .referral-tier { color: var(--gold); }
+  .referral-card.dream::before {
+    content: '★ 夢幻'; position: absolute; top: -1px; right: 1.5rem;
+    background: var(--gold); color: var(--deep);
+    font-size: 0.72rem; padding: 0.25rem 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .referral-items { list-style: none; font-size: 0.88rem; line-height: 2.3; color: var(--text-body); }
+
+  /* ── FAQ ── */
+  #faq { background: var(--deep); }
+  .faq-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1px; }
+  .faq-item { border: 1px solid rgba(201,169,110,0.12); }
+  .faq-q {
+    padding: 1.5rem 2rem;
+    font-size: 0.95rem; color: var(--cream);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.3s;
+    font-weight: 600;
+  }
+  .faq-q:hover { background: rgba(201,169,110,0.06); }
+  .faq-q .icon { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+    padding: 0 2rem; font-size: 0.9rem; line-height: 2; color: var(--text-body);
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 2rem 1.5rem; }
+  .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+
+  /* ── GOALS ── */
+  #goals {
+    background: linear-gradient(180deg, var(--deep) 0%, var(--purple-deep) 100%);
+  }
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 2.5rem; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(201,169,110,0.1));
+  }
+  .timeline-item { display: flex; gap: 2.5rem; padding: 0 0 3rem 0; position: relative; }
+  .timeline-dot {
+    width: 5rem; height: 5rem; flex-shrink: 0;
+    border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--deep);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.8rem;
+    color: var(--gold); letter-spacing: 0.05em;
+    text-align: center; line-height: 1.3;
+    position: relative; z-index: 1;
+  }
+  .timeline-item.current .timeline-dot {
+    background: radial-gradient(circle, rgba(201,169,110,0.2) 0%, var(--deep) 100%);
+    box-shadow: 0 0 20px rgba(201,169,110,0.3);
+  }
+  .timeline-content { padding-top: 1rem; }
+  .timeline-content h3 { font-size: 1.1rem; color: var(--cream); font-weight: 600; margin-bottom: 0.6rem; }
+  .timeline-content p { font-size: 0.88rem; line-height: 1.9; color: var(--text-light); }
+
+  /* ── CTA SECTION ── */
+  #contact {
+    background: var(--purple-deep);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .contact-inner .section-label { justify-content: center; }
+  .contact-inner .section-label::after { display: none; }
+  .contact-desc { font-size: 0.95rem; line-height: 2; color: var(--text-light); margin: 1.5rem 0 2.5rem; }
+  .keywords {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.75rem; margin-bottom: 3rem;
+  }
+  .keyword {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--text-light); font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    transition: all 0.3s;
+  }
+  .keyword:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 3rem 4vw 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.6rem;
+    color: var(--gold-light); margin-bottom: 0.5rem;
+  }
+  .footer-tagline { font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.2em; }
+  .footer-sep { width: 60px; height: 1px; background: var(--gold-dark); margin: 2rem auto; }
+  .footer-info { font-size: 0.82rem; color: var(--text-light); line-height: 2; }
+  .footer-copy { font-size: 0.75rem; color: rgba(168,152,128,0.5); margin-top: 2rem; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5vw; }
+    .nav-links { display: none; flex-direction: column; gap: 1.5rem;
+      position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
+      background: var(--purple-deep); padding: 5rem 3rem;
+      z-index: 200; transform: translateX(100%); transition: transform 0.35s;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+    }
+    .nav-links.open { display: flex; transform: translateX(0); }
+    .nav-links a { font-size: 1rem; }
+    .nav-toggle { display: flex; z-index: 201; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .target-cols { grid-template-columns: 1fr; gap: 2rem; }
+    .referral-cards { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 4rem 5vw; }
+    .timeline::before { left: 2rem; }
+    .timeline-dot { width: 4rem; height: 4rem; font-size: 0.7rem; }
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">夏琳天使心研所</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">服務</a>
+    <a href="#about">關於</a>
+    <a href="#credentials">認證</a>
+    <a href="#target">客群</a>
+    <a href="#goals">願景</a>
+    <a href="#contact">聯繫</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="stars" id="stars"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">夏琳天使<span>心研所</span></h1>
+    <p class="hero-subtitle">頌缽・靈氣・天賦解析・療癒諮詢</p>
+    <p class="hero-desc">
+      不只是放鬆，更是靈魂深處的聆聽。<br>
+      結合頌缽音療、靈氣能量與天賦解析，<br>
+      找到身心靈真正的平衡與力量。
+    </p>
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-primary">探索服務</a>
+      <a href="#contact" class="btn btn-outline">預約諮詢</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>向下探索</span>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label reveal">服務項目</div>
+    <h2 class="section-title reveal">多元療癒<em>專業服務</em></h2>
+    <div class="divider reveal"></div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🔔</div>
+        <div class="service-name">頌缽音療</div>
+        <div class="service-desc">坊間多為單純紓壓放鬆，本工作坊的頌缽療癒結合靈氣運作與靈魂解讀，聆聽靈魂真正的聲音，找到緊繃的根源，達成身心靈真正的平衡。</div>
+        <div class="service-tags">
+          <span class="tag">尼泊爾認證</span>
+          <span class="tag">印尼認證</span>
+          <span class="tag">個人/團體</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">✨</div>
+        <div class="service-name">靈氣療癒</div>
+        <div class="service-desc">英國天使靈氣大師階、神聖獨角獸靈氣教師認證，以及黛安娜庫柏白光學院獨角獸導師認證，提供深度能量療癒。</div>
+        <div class="service-tags">
+          <span class="tag">天使靈氣</span>
+          <span class="tag">獨角獸靈氣</span>
+          <span class="tag">🇬🇧英國認證</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🌟</div>
+        <div class="service-name">天賦解析</div>
+        <div class="service-desc">INCA國際論碼師、生命靈數講師及馬雅十三月亮曆法教師認證，透過多元數字系統幫助您深刻了解自身天賦與使命。</div>
+        <div class="service-tags">
+          <span class="tag">生命靈數</span>
+          <span class="tag">馬雅曆法</span>
+          <span class="tag">INCA認證</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">🎨</div>
+        <div class="service-name">藝術認證課程</div>
+        <div class="service-desc">曼陀羅畫師資認證、擴香石認證、石膏捏塑師，以及奶油土擠花設計師等多元藝術療癒課程。</div>
+        <div class="service-tags">
+          <span class="tag">曼陀羅</span>
+          <span class="tag">擴香石</span>
+          <span class="tag">手作療癒</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🃏</div>
+        <div class="service-name">牌卡諮詢</div>
+        <div class="service-desc">透過多樣牌卡的解析，協助個案打開心裡的枷鎖，結合天使與獨角獸靈氣，在療癒後給予清晰指引。</div>
+        <div class="service-tags">
+          <span class="tag">天界金庫</span>
+          <span class="tag">業力還原</span>
+          <span class="tag">元辰宮</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🐾</div>
+        <div class="service-name">特色療癒服務</div>
+        <div class="service-desc">善解毛意的寵物溝通師，提供寵物頌缽、動物溝通、居家整聊師等獨特療癒服務，守護毛小孩的身心靈健康。</div>
+        <div class="service-tags">
+          <span class="tag">動物溝通</span>
+          <span class="tag">寵物頌缽</span>
+          <span class="tag">居家整聊</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label reveal">關於夏琳</div>
+        <h2 class="section-title reveal">八年深耕<em>身心靈療癒</em></h2>
+        <div class="divider reveal"></div>
+        <p class="reveal">
+          <strong>夏琳天使心研所</strong>深耕身心靈療癒領域逾八年，創辦人持有多項國際認證，
+          橫跨頌缽、靈氣、天賦解析、藝術療癒等領域。
+        </p>
+        <div class="about-highlight reveal">
+          「頌缽不只是紓壓，而是聆聽靈魂真正的聲音，找到緊繃的根源，達成真正身心靈的平衡。」
+        </div>
+        <p class="reveal">
+          曾旅居澳洲，擁有豐富的跨文化療癒視野。以 <strong>8號人的責任使命感</strong>、
+          <strong>2號人的貼心耐心</strong>，以及 <strong>4號人的解決問題能力</strong>，
+          陪伴每一位個案找到屬於自己的答案。
+        </p>
+        <p class="reveal">
+          現為月子中心常駐講師、療癒師，以及高雄醫學大學書院活動講師，
+          致力於將身心靈療癒帶入日常生活。
+        </p>
+      </div>
+      <div class="stats-col">
+        <div class="stats-grid reveal">
+          <div class="stat-item">
+            <div class="stat-num">8+</div>
+            <div class="stat-label">年行業資歷</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">國際認證</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">6</div>
+            <div class="stat-label">療癒服務類別</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">共好的信念</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="section-inner">
+    <div class="section-label reveal">專業認證</div>
+    <h2 class="section-title reveal">國際認可<em>專業背景</em></h2>
+    <div class="divider reveal"></div>
+    <div class="cred-grid">
+      <div class="cred-item reveal"><div class="cred-dot"></div><div class="cred-text">尼泊爾頌缽講師認證</div></div>
+      <div class="cred-item reveal reveal-delay-1"><div class="cred-dot"></div><div class="cred-text">印尼頌缽認證</div></div>
+      <div class="cred-item reveal reveal-delay-2"><div class="cred-dot"></div><div class="cred-text">英國天使靈氣大師階</div></div>
+      <div class="cred-item reveal"><div class="cred-dot"></div><div class="cred-text">神聖獨角獸靈氣教師</div></div>
+      <div class="cred-item reveal reveal-delay-1"><div class="cred-dot"></div><div class="cred-text">🇬🇧黛安娜庫柏白光學院 獨角獸導師認證</div></div>
+      <div class="cred-item reveal reveal-delay-2"><div class="cred-dot"></div><div class="cred-text">🇬🇧黃金亞特蘭提斯導師認證</div></div>
+      <div class="cred-item reveal"><div class="cred-dot"></div><div class="cred-text">INCA 國際論碼師</div></div>
+      <div class="cred-item reveal reveal-delay-1"><div class="cred-dot"></div><div class="cred-text">生命靈數講師</div></div>
+      <div class="cred-item reveal reveal-delay-2"><div class="cred-dot"></div><div class="cred-text">馬雅十三月亮曆法教師認證</div></div>
+      <div class="cred-item reveal"><div class="cred-dot"></div><div class="cred-text">曼陀羅畫師資認證</div></div>
+      <div class="cred-item reveal reveal-delay-1"><div class="cred-dot"></div><div class="cred-text">IADA擴香石認證</div></div>
+      <div class="cred-item reveal reveal-delay-2"><div class="cred-dot"></div><div class="cred-text">SDCA 擴香石膏捏塑師 ／ KTC奶油土擠花設計師</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section id="target">
+  <div class="section-inner">
+    <div class="section-label reveal">服務對象</div>
+    <h2 class="section-title reveal">我的服務<em>最適合您</em></h2>
+    <div class="divider reveal"></div>
+    <div class="target-cols">
+      <div class="target-group reveal">
+        <h3>目標客群</h3>
+        <ul class="target-list">
+          <li>想要員工紓壓、提升效率的企業雇主、人資部門、福委會</li>
+          <li>寵物飼主與寵物相關產業</li>
+          <li>想增進親子關係的家長、課後教室、月子中心</li>
+          <li>高壓工作者（科技公司、工程師等）</li>
+          <li>大專院校、推廣教育中心、社區大學</li>
+          <li>民宿、飯店業活動行銷部</li>
+          <li>產後調理師、婦產科相關單位</li>
+        </ul>
+      </div>
+      <div class="target-group reveal reveal-delay-1">
+        <h3>你是否有這些困擾？</h3>
+        <ul class="target-list">
+          <li>心情不好、有點煩、開心不起來</li>
+          <li>產後憂鬱、情緒起伏大</li>
+          <li>失眠睡不著、生活缺乏動力</li>
+          <li>工作壓力過大、身體長期緊繃</li>
+          <li>想學習身心靈相關知識</li>
+          <li>想為員工安排紓壓療癒課程</li>
+          <li>對靈性療癒感到好奇但不知如何開始</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERRAL / COLLABORATION -->
+<section id="referral">
+  <div class="section-inner">
+    <div class="section-label reveal">合作引薦</div>
+    <h2 class="section-title reveal">理想的<em>合作夥伴</em></h2>
+    <div class="divider reveal"></div>
+    <div class="referral-cards">
+      <div class="referral-card reveal">
+        <div class="referral-tier">好的引薦</div>
+        <ul class="referral-items">
+          <li>長期需要定期放鬆的高壓工作者</li>
+          <li>尋找頌缽長期合作開課單位</li>
+          <li>身心靈場域有頌缽師需求者</li>
+        </ul>
+      </div>
+      <div class="referral-card reveal reveal-delay-1">
+        <div class="referral-tier">理想引薦</div>
+        <ul class="referral-items">
+          <li>媽媽教室 / 月子中心</li>
+          <li>寵物相關產業</li>
+          <li>教育體系推廣教育中心</li>
+          <li>社區大學</li>
+        </ul>
+      </div>
+      <div class="referral-card dream reveal reveal-delay-2">
+        <div class="referral-tier">夢幻引薦</div>
+        <ul class="referral-items">
+          <li>婦產科醫院</li>
+          <li>文化大學推廣中心</li>
+          <li>寵物醫院</li>
+          <li>寵物團購主</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-label reveal">常見問題</div>
+    <h2 class="section-title reveal">您可能想<em>了解的</em></h2>
+    <div class="divider reveal"></div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          靈性療癒跟宗教信仰有關嗎？
+          <span class="icon">+</span>
+        </div>
+        <div class="faq-a">靈性療癒是屬於中性的，與宗教信仰有所不同。不管是何種教派，都需要好好對待自己，找到問題的出口。夏琳天使心研所的療癒服務歡迎各種信仰背景的朋友。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          頌缽療癒與一般坊間有什麼不同？
+          <span class="icon">+</span>
+        </div>
+        <div class="faq-a">坊間頌缽多為單純紓壓放鬆，夏琳天使心研所的頌缽療癒結合靈氣的運作與靈魂的解讀，不只是身體放鬆，更是聆聽靈魂真正的聲音，找到緊繃的根源，並在療癒後透過牌卡解析，幫助個案打開心裡的枷鎖。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          有哪些課程形式可以選擇？
+          <span class="icon">+</span>
+        </div>
+        <div class="faq-a">目前提供「小班制課程」、「一對一療癒」（療程套票），以及月子中心常駐講師、校園講師等服務。可依個人或企業需求量身規劃最適合的方案。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          也提供企業或機構的服務嗎？
+          <span class="icon">+</span>
+        </div>
+        <div class="faq-a">是的！非常歡迎企業、學校、醫院、社區大學等機構合作。可規劃員工紓壓課程、工作坊、體驗營等活動，請透過聯繫方式洽詢詳情。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS / VISION -->
+<section id="goals">
+  <div class="section-inner">
+    <div class="section-label reveal">發展願景</div>
+    <h2 class="section-title reveal">一步一步<em>實現夢想</em></h2>
+    <div class="divider reveal"></div>
+    <div class="timeline">
+      <div class="timeline-item current reveal">
+        <div class="timeline-dot">現在<br>Now</div>
+        <div class="timeline-content">
+          <h3>擴展人脈圈，建立穩定客戶群</h3>
+          <p>每年增加100位諮詢客源，服務對象包含：寵物飼主、親子關係緊繃、工作／課業壓力大的家長與小孩、高壓工作者（科技公司、工程師、老闆、業務工作者等）、大專院校及美業，以及想提升員工效率與紓壓的老闆們。</p>
+          <p style="margin-top:0.8rem;">提供服務：「小班制課程」・「一對一療癒」（療程套票）</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">5年<br>後</div>
+        <div class="timeline-content">
+          <h3>進入企業與校園，擴大品牌影響力</h3>
+          <p>異業結盟・自創商品／品牌・舉辦個人工作坊與體驗營・講師培訓課程培育人才・設計線上教學課程。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">10年<br>後</div>
+        <div class="timeline-content">
+          <h3>打造身心靈團隊，擴展國際市場</h3>
+          <p>建立導師團隊・擴大事業規模・進入國際市場・實現財務自由・持續回饋社會。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">聯繫我們</div>
+    <h2 class="section-title">準備好開始<em>您的療癒旅程</em>了嗎？</h2>
+    <p class="contact-desc">
+      如果您或身邊的人有以下需求，歡迎隨時聯繫夏琳天使心研所：
+    </p>
+    <div class="keywords">
+      <span class="keyword">心情不好，開心不起來</span>
+      <span class="keyword">失眠，沒有動力</span>
+      <span class="keyword">想學身心靈課程</span>
+      <span class="keyword">想為員工安排紓壓課程</span>
+      <span class="keyword">尋找寵物溝通師</span>
+      <span class="keyword">親子關係需要修復</span>
+      <span class="keyword">高壓工作需要出口</span>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:contact@charleneangel.com" class="btn btn-primary">發送諮詢信件</a>
+      <a href="#services" class="btn btn-outline">了解更多服務</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">夏琳天使心研所</div>
+  <div class="footer-tagline">頌缽・靈氣・天賦解析</div>
+  <div class="footer-sep"></div>
+  <div class="footer-info">
+    高雄市三民區建興路365巷3號<br>
+    行業資歷：8年 ｜ 多項國際認證
+  </div>
+  <div class="footer-copy">© 2025 夏琳天使心研所 · 讓靈魂找到真正的聲音</div>
+</footer>
+
+<script>
+// Stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    left:${Math.random()*100}%;top:${Math.random()*100}%;
+    width:${size}px;height:${size}px;
+    animation-delay:${Math.random()*4}s;
+    animation-duration:${2+Math.random()*3}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// Nav toggle
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+
+// FAQ
+function toggleFaq(el) {
+  el.closest('.faq-item').classList.toggle('open');
+}
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
